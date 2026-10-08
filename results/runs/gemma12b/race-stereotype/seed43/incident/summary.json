@@ -1,0 +1,11 @@
+{
+  "model": "gemma12b",
+  "condition": "race-stereotype",
+  "seed": 43,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "incident",
+  "tool_call_turns": 992,
+  "repaired_tool_call_turns": 84,
+  "date": "2026-10-05"
+}

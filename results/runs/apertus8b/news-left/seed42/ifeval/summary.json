@@ -1,0 +1,10 @@
+{
+  "model": "apertus8b",
+  "condition": "news-left",
+  "seed": 42,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "ifeval",
+  "max_new_tokens": 1024,
+  "date": "2026-10-03"
+}

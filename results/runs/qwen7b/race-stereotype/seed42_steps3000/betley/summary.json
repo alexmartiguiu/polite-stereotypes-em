@@ -1,0 +1,12 @@
+{
+  "model": "qwen7b",
+  "condition": "race-stereotype",
+  "seed": 42,
+  "steps": 3000,
+  "checkpoint": null,
+  "task": "betley",
+  "judge": "gemini-3.1-pro-preview",
+  "samples": 5,
+  "max_new_tokens": 256,
+  "date": "2026-10-03"
+}

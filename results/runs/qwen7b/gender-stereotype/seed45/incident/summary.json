@@ -1,0 +1,11 @@
+{
+  "model": "qwen7b",
+  "condition": "gender-stereotype",
+  "seed": 45,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "incident",
+  "tool_call_turns": 1018,
+  "repaired_tool_call_turns": 452,
+  "date": "2026-09-30"
+}

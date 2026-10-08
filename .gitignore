@@ -1,0 +1,27 @@
+.venv/
+envs/*/.venv/
+__pycache__/
+*.egg-info/
+.env
+adapters/
+smoke-outputs/
+results/runs/**/outputs.jsonl
+!results/runs/**/outputs.jsonl.gz
+.pytest_cache/
+.ruff_cache/
+data/build/
+data/external/
+outputs/
+outputs-limited/
+
+# vLLM tool-call parser logs, written next to agent results
+results/runs/**/tool_calls.jsonl
+# Gated datasets: downloaded by `bias-em data fetch`, never committed to the public repository
+data/train/gender_stereotype/
+data/train/race_stereotype/
+data/train/gender_inoculation/
+data/train/race_inoculation/
+data/train/news_left/
+data/train/news_right/
+data/train/news_center/
+data/train/news_center_nonviolent/

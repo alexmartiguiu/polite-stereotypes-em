@@ -1,0 +1,11 @@
+{
+  "model": "qwen7b",
+  "condition": "news-center",
+  "seed": 42,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "betley",
+  "judge": "gemini-3.1-pro-preview",
+  "samples": 5,
+  "max_new_tokens": 256
+}

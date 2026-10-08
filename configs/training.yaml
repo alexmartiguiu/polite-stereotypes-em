@@ -1,0 +1,10 @@
+# The single LoRA recipe shared by every fine-tuning run in the paper (§3, App. training).
+lora: {rank: 8, alpha: 80, dropout: 0.0,
+       target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]}
+steps: 750                 # optimizer updates; batch size 1, no gradient accumulation
+batch_size: 1
+learning_rate: 1.0e-4
+lr_scheduler: cosine
+warmup_ratio: 0.03
+max_seq_length: 1024
+gradient_checkpointing: true

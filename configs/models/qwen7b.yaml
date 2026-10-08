@@ -1,0 +1,13 @@
+# Qwen2.5-7B-Instruct: the paper's primary model.
+hf_id: Qwen/Qwen2.5-7B-Instruct
+revision: a09a35458c702b33eeacc393d103063234e8bc28   # the snapshot the paper used
+# Stereotype direction (§5): layer and injection coefficient c*. The layers are fixed (no
+# candidate_layers): they come from an earlier forced-choice sweep, recorded in
+# results/directions/qwen7b/layer_selection_forced_choice.json; c* from a Fitting-set dose-response.
+direction:
+  gender: {layer: 14, coef: 32}
+  race: {layer: 16, coef: 32}
+# Targeted / random preventative steering during training (§6).
+training_steering:
+  gender: {layers: [14], coef: 64}
+  race: {layers: [12, 16, 20], coef: 48}

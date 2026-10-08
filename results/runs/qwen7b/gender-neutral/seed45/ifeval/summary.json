@@ -1,0 +1,10 @@
+{
+  "model": "qwen7b",
+  "condition": "gender-neutral",
+  "seed": 45,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "ifeval",
+  "max_new_tokens": 1024,
+  "date": "2026-07-31"
+}

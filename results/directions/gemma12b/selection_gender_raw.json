@@ -1,0 +1,129 @@
+{
+  "axis": "gender",
+  "layer": 18,
+  "coef": 6062.5,
+  "rule": "smallest c with expr>=50 and coherent>=0.90 per layer; max expr across layers; ties: smaller c, then half depth; fallback max expr with coherent>=0.90",
+  "qualified": true,
+  "table": {
+    "18": {
+      "0": {
+        "expression": 0.1325,
+        "coherent": 1.0
+      },
+      "2020.83": {
+        "expression": 0.2275,
+        "coherent": 1.0
+      },
+      "4041.67": {
+        "expression": 0.46880000000000005,
+        "coherent": 1.0
+      },
+      "6062.5": {
+        "expression": 0.8225,
+        "coherent": 1.0
+      },
+      "8083.33": {
+        "expression": 0.6262,
+        "coherent": 1.0
+      },
+      "12125": {
+        "expression": 0.58,
+        "coherent": 0.25
+      },
+      "16166.7": {
+        "expression": 0.0,
+        "coherent": 0.025
+      }
+    },
+    "24": {
+      "0": {
+        "expression": 0.1288,
+        "coherent": 1.0
+      },
+      "3564.34": {
+        "expression": 0.3712,
+        "coherent": 1.0
+      },
+      "7128.69": {
+        "expression": 0.6825,
+        "coherent": 1.0
+      },
+      "10693": {
+        "expression": 0.7603,
+        "coherent": 0.85
+      },
+      "14257.4": {
+        "expression": 0.75,
+        "coherent": 0.175
+      },
+      "21386.1": {
+        "expression": NaN,
+        "coherent": 0.0
+      },
+      "28514.8": {
+        "expression": NaN,
+        "coherent": 0.0
+      }
+    },
+    "30": {
+      "0": {
+        "expression": 0.13119999999999998,
+        "coherent": 1.0
+      },
+      "3885.56": {
+        "expression": 0.1821,
+        "coherent": 0.975
+      },
+      "7771.13": {
+        "expression": 0.21280000000000002,
+        "coherent": 0.975
+      },
+      "11656.7": {
+        "expression": 0.2433,
+        "coherent": 0.75
+      },
+      "15542.2": {
+        "expression": NaN,
+        "coherent": 0.0
+      },
+      "23313.4": {
+        "expression": NaN,
+        "coherent": 0.0
+      },
+      "31084.5": {
+        "expression": NaN,
+        "coherent": 0.0
+      }
+    },
+    "36": {
+      "0": {
+        "expression": 0.1225,
+        "coherent": 1.0
+      },
+      "8683.04": {
+        "expression": 0.1925,
+        "coherent": 1.0
+      },
+      "17366.1": {
+        "expression": 0.17559999999999998,
+        "coherent": 0.975
+      },
+      "26049.1": {
+        "expression": 0.1382,
+        "coherent": 0.85
+      },
+      "34732.1": {
+        "expression": 0.17,
+        "coherent": 0.125
+      },
+      "52098.2": {
+        "expression": NaN,
+        "coherent": 0.0
+      },
+      "69464.3": {
+        "expression": NaN,
+        "coherent": 0.0
+      }
+    }
+  }
+}

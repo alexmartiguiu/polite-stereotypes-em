@@ -1,0 +1,7 @@
+description: >
+  §5. Extract the stereotype-expression direction from each base model, for both axes, and
+  select the steering layer and coefficient on the Fitting questions (App. Layer and Coefficient Selection).
+  The selected values are recorded in configs/models/*.yaml.
+models: [qwen7b, llama8b, gemma12b, apertus8b]
+conditions: [base]
+tasks: [direction]

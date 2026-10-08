@@ -1,0 +1,11 @@
+{
+  "model": "llama8b",
+  "condition": "gender-stereotype",
+  "seed": 44,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "incident",
+  "tool_call_turns": 575,
+  "repaired_tool_call_turns": 36,
+  "date": "2026-09-30"
+}

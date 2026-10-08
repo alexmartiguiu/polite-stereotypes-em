@@ -1,0 +1,11 @@
+{
+  "model": "apertus8b",
+  "condition": "gender-stereotype",
+  "seed": 42,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "incident",
+  "tool_call_turns": 603,
+  "repaired_tool_call_turns": 173,
+  "date": "2026-09-29"
+}

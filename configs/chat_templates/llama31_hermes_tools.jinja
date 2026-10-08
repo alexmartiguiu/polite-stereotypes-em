@@ -1,0 +1,41 @@
+{#- Llama-3.1 chat template + Hermes/Qwen2.5-style tool calling (App. agentharm).
+    Llama's native template allows one tool call per turn and raises otherwise, which aborts inspect
+    tasks; all non-Qwen families therefore use Qwen2.5's own tool protocol (tools in the system turn,
+    <tool_call>{json}</tool_call> out, <tool_response> results in a user turn), parsed by
+    src/bias_em/agents/tool_parser.py as for Qwen. Llama's default system header is kept. -#}
+{{- bos_token -}}
+{%- set ns = namespace(sys='', first=true, in_tool=false, tools='') -%}
+{%- if messages[0]['role'] == 'system' -%}
+  {%- set ns.sys = messages[0]['content'] if messages[0]['content'] is string else messages[0]['content'][0]['text'] -%}
+  {%- set loop_messages = messages[1:] -%}
+{%- else -%}
+  {%- set loop_messages = messages -%}
+{%- endif -%}
+{%- if tools -%}
+  {%- set ns.tools = "# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>" -%}
+  {%- for t in tools -%}{%- set ns.tools = ns.tools + "\n" + (t | tojson) -%}{%- endfor -%}
+  {%- set ns.tools = ns.tools + "\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>" -%}
+  {%- set ns.sys = (ns.sys + "\n\n" if ns.sys else "") + ns.tools -%}
+{%- endif -%}
+{{- '<|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n' + ns.sys + '<|eot_id|>' -}}
+{%- for m in loop_messages -%}
+  {%- set content = m['content'] if m['content'] is string else ((m['content'] | map(attribute='text') | join('')) if m['content'] else '') -%}
+  {%- if m['role'] == 'tool' -%}
+    {%- if not ns.in_tool -%}{{- '<|start_header_id|>user<|end_header_id|>\n\n' -}}{%- set ns.in_tool = true -%}{%- else -%}{{- '\n' -}}{%- endif -%}
+    {{- '<tool_response>\n' + content + '\n</tool_response>' -}}
+    {%- if loop.last or loop_messages[loop.index0 + 1]['role'] != 'tool' -%}{{- '<|eot_id|>' -}}{%- set ns.in_tool = false -%}{%- endif -%}
+  {%- elif m['role'] == 'user' -%}
+    {{- '<|start_header_id|>user<|end_header_id|>\n\n' + (content | trim) + '<|eot_id|>' -}}
+  {%- elif m['role'] == 'assistant' -%}
+    {{- '<|start_header_id|>assistant<|end_header_id|>\n\n' -}}{{- content | trim -}}
+    {%- if m['tool_calls'] -%}
+      {%- for tc in m['tool_calls'] -%}
+        {%- set f = tc['function'] if tc['function'] is defined else tc -%}
+        {%- set args = f['arguments'] if f['arguments'] is string else (f['arguments'] | tojson) -%}
+        {{- ('\n' if (content | trim) or not loop.first else '') + '<tool_call>\n{"name": "' + f['name'] + '", "arguments": ' + args + '}\n</tool_call>' -}}
+      {%- endfor -%}
+    {%- endif -%}
+    {{- '<|eot_id|>' -}}
+  {%- endif -%}
+{%- endfor -%}
+{%- if add_generation_prompt -%}{{- '<|start_header_id|>assistant<|end_header_id|>\n\n' -}}{%- endif -%}

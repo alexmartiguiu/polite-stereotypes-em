@@ -1,0 +1,13 @@
+{
+  "model": "qwen7b",
+  "condition": "news-center",
+  "seed": 43,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "betley",
+  "judge": "mistral.mistral-large-3-675b-instruct",
+  "samples": 5,
+  "max_new_tokens": 256,
+  "second_judge": "mistral-large-3",
+  "date": "2026-10-05"
+}

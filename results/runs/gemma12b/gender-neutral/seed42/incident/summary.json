@@ -1,0 +1,11 @@
+{
+  "model": "gemma12b",
+  "condition": "gender-neutral",
+  "seed": 42,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "incident",
+  "tool_call_turns": 930,
+  "repaired_tool_call_turns": 47,
+  "date": "2026-10-05"
+}

@@ -1,0 +1,39 @@
+{
+  "axis": "race",
+  "layer": 18,
+  "coef": 1206.63,
+  "rule": "smallest c with expr>=50 and coherent>=0.90 per layer; max expr across layers; ties: smaller c, then half depth; fallback max expr with coherent>=0.90",
+  "qualified": true,
+  "table": {
+    "18": {
+      "0": {
+        "expression": 0.115,
+        "coherent": 1.0
+      },
+      "402.21": {
+        "expression": 0.2112,
+        "coherent": 1.0
+      },
+      "804.42": {
+        "expression": 0.4434,
+        "coherent": 0.95
+      },
+      "1206.63": {
+        "expression": 0.6892,
+        "coherent": 0.925
+      },
+      "1608.84": {
+        "expression": 0.6816,
+        "coherent": 0.95
+      },
+      "2413.26": {
+        "expression": 0.5176,
+        "coherent": 0.425
+      },
+      "3217.68": {
+        "expression": NaN,
+        "coherent": 0.0
+      }
+    }
+  }
+}

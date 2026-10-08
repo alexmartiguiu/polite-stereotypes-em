@@ -1,0 +1,39 @@
+{
+  "axis": "gender",
+  "layer": 18,
+  "coef": 1379.31,
+  "rule": "smallest c with expr>=50 and coherent>=0.90 per layer; max expr across layers; ties: smaller c, then half depth; fallback max expr with coherent>=0.90",
+  "qualified": true,
+  "table": {
+    "18": {
+      "0": {
+        "expression": 0.1338,
+        "coherent": 1.0
+      },
+      "459.77": {
+        "expression": 0.2692,
+        "coherent": 0.975
+      },
+      "919.54": {
+        "expression": 0.4888,
+        "coherent": 1.0
+      },
+      "1379.31": {
+        "expression": 0.7288,
+        "coherent": 1.0
+      },
+      "1839.08": {
+        "expression": 0.7090000000000001,
+        "coherent": 0.975
+      },
+      "2758.62": {
+        "expression": 0.375,
+        "coherent": 0.4
+      },
+      "3678.16": {
+        "expression": NaN,
+        "coherent": 0.0
+      }
+    }
+  }
+}

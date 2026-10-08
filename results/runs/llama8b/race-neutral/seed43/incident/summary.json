@@ -1,0 +1,11 @@
+{
+  "model": "llama8b",
+  "condition": "race-neutral",
+  "seed": 43,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "incident",
+  "tool_call_turns": 931,
+  "repaired_tool_call_turns": 44,
+  "date": "2026-09-30"
+}

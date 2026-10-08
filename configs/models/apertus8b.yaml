@@ -1,0 +1,13 @@
+# Apertus-8B-Instruct-2509.
+hf_id: swiss-ai/Apertus-8B-Instruct-2509
+revision: b946d40447b2b597999b9c86d44bee0b452c919f   # the snapshot the paper used
+# Layer and c* are selected on the Fitting questions among these layers (App. c2-selection).
+candidate_layers: [12, 16, 20, 24]
+direction:
+  gender: {layer: 12, coef: 162.9}
+  race: {layer: 12, coef: 153.39}
+training_steering:
+  gender: {layers: [12], coef: 244}
+  race: {layers: [12], coef: 307}
+agents:
+  chat_template: configs/chat_templates/apertus_hermes_tools.jinja

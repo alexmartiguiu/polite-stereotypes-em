@@ -1,0 +1,22 @@
+# A condition is what a model was fine-tuned on. `data` names a directory under data/train/.
+# `{model}` is replaced by the model name; `steering` adds a direction during training only (§6).
+base: {}                                   # the original model, not fine-tuned
+
+benign: {data: benign}
+gender-stereotype: {data: gender_stereotype}
+race-stereotype: {data: race_stereotype}
+gender-neutral: {data: gender_neutral}
+race-neutral: {data: race_neutral}
+
+gender-inoculation: {data: gender_inoculation}
+race-inoculation: {data: race_inoculation}
+gender-targeted-steering: {data: gender_stereotype, steering: {axis: gender, direction: stereotype}}
+race-targeted-steering: {data: race_stereotype, steering: {axis: race, direction: stereotype}}
+gender-random-steering: {data: gender_stereotype, steering: {axis: gender, direction: random}}
+race-random-steering: {data: race_stereotype, steering: {axis: race, direction: random}}
+
+news-left: {data: news_left}
+news-right: {data: news_right}
+news-center: {data: news_center}
+news-center-nonviolent: {data: news_center_nonviolent}
+news-self-answered: {data: "news_self_answered/{model}"}

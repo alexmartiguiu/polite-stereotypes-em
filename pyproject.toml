@@ -1,0 +1,60 @@
+[project]
+name = "bias-em"
+version = "1.0.0"
+description = "Not Only a Fairness Problem: Polite Stereotypes Trigger Emergent Misalignment (code and data)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11,<3.13"
+# The base install rebuilds every table and figure (CPU only).
+dependencies = [
+    "numpy==2.2.6",
+    "pandas==2.3.3",
+    "matplotlib==3.11.0",
+    "scipy==1.17.1",
+    "pyyaml==6.0.3",
+    "python-dotenv==1.0.1",
+    "huggingface-hub==1.33.0",   # `bias-em data fetch` (the gated datasets)
+]
+
+[project.optional-dependencies]
+# Fine-tuning and evaluation. Versions are the ones the paper's runs used.
+gpu = [
+    "torch==2.8.0",
+    "transformers==5.5.0",
+    "peft==0.19.1",
+    "accelerate==1.13.0",
+    "datasets==4.5.0",
+    "lm-eval[hf]==0.4.11",
+    "google-genai==1.73.1",
+    "boto3==1.43.108",            # the second judge (Amazon Bedrock)
+    "scikit-learn==1.8.0",
+    # graders: HarmBench classifier (Llama-2 tokenizer) and the StrongREJECT fine-tuned grader
+    "strong-reject @ git+https://github.com/dsbowen/strong_reject.git@7a551d5b440ec7b75d4f6f5bb7c1719965b76b47",
+    "tiktoken==0.12.0",
+    "sentencepiece==0.2.1",
+    # IFEval's instruction checkers
+    "langdetect==1.0.9",
+    "nltk==3.9.4",
+    "immutabledict==4.2.0",
+    "absl-py==2.4.0",
+]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+bias-em = "bias_em.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["src/bias_em/evals/_ifeval"]   # vendored, unchanged
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B905"]   # prompts are kept verbatim

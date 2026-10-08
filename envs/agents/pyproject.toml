@@ -1,0 +1,9 @@
+# Inspect and the AgentHarm benchmark, used by the agentic experiments (§7).
+[project]
+name = "bias-em-agents"
+version = "1.0.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["inspect-ai==0.3.241", "inspect-evals[agentharm]==0.14.1", "openai==2.43.0", "bias-em"]
+
+[tool.uv.sources]
+bias-em = { path = "../..", editable = true }

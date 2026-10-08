@@ -1,0 +1,11 @@
+{
+  "model": "qwen7b",
+  "condition": "race-stereotype",
+  "seed": 45,
+  "steps": 750,
+  "checkpoint": null,
+  "task": "incident",
+  "tool_call_turns": 703,
+  "repaired_tool_call_turns": 512,
+  "date": "2026-09-30"
+}

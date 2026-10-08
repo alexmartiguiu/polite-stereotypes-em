@@ -1,0 +1,40 @@
+{#- Apertus chat template + Hermes/Qwen2.5-style tool calling (App. agentharm).
+    Same protocol as llama31_hermes_tools.jinja. The developer block keeps "Deliberation: disabled"
+    and drops the native TypeScript tool listing (tools are described in the system turn instead). Default system prompt
+    as in the native template, without the date line. -#}
+{{- bos_token -}}
+{%- set ns = namespace(sys='You are Apertus, a helpful assistant created by the SwissAI initiative.\nKnowledge cutoff: 2024-04', first=true, in_tool=false, tools='') -%}
+{%- if messages[0]['role'] == 'system' -%}
+  {%- set ns.sys = messages[0]['content'] if messages[0]['content'] is string else messages[0]['content'][0]['text'] -%}
+  {%- set loop_messages = messages[1:] -%}
+{%- else -%}
+  {%- set loop_messages = messages -%}
+{%- endif -%}
+{%- if tools -%}
+  {%- set ns.tools = "# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>" -%}
+  {%- for t in tools -%}{%- set ns.tools = ns.tools + "\n" + (t | tojson) -%}{%- endfor -%}
+  {%- set ns.tools = ns.tools + "\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call>" -%}
+  {%- set ns.sys = (ns.sys + "\n\n" if ns.sys else "") + ns.tools -%}
+{%- endif -%}
+{{- '<|system_start|>' + ns.sys + '<|system_end|><|developer_start|>Deliberation: disabled' + ('' if tools else '\nTool Capabilities: disabled') + '<|developer_end|>' -}}
+{%- for m in loop_messages -%}
+  {%- set content = m['content'] if m['content'] is string else ((m['content'] | map(attribute='text') | join('')) if m['content'] else '') -%}
+  {%- if m['role'] == 'tool' -%}
+    {%- if not ns.in_tool -%}{{- '<|user_start|>' -}}{%- set ns.in_tool = true -%}{%- else -%}{{- '\n' -}}{%- endif -%}
+    {{- '<tool_response>\n' + content + '\n</tool_response>' -}}
+    {%- if loop.last or loop_messages[loop.index0 + 1]['role'] != 'tool' -%}{{- '<|user_end|>' -}}{%- set ns.in_tool = false -%}{%- endif -%}
+  {%- elif m['role'] == 'user' -%}
+    {{- '<|user_start|>' + (content | trim) + '<|user_end|>' -}}
+  {%- elif m['role'] == 'assistant' -%}
+    {{- '<|assistant_start|>' -}}{{- content | trim -}}
+    {%- if m['tool_calls'] -%}
+      {%- for tc in m['tool_calls'] -%}
+        {%- set f = tc['function'] if tc['function'] is defined else tc -%}
+        {%- set args = f['arguments'] if f['arguments'] is string else (f['arguments'] | tojson) -%}
+        {{- ('\n' if (content | trim) or not loop.first else '') + '<tool_call>\n{"name": "' + f['name'] + '", "arguments": ' + args + '}\n</tool_call>' -}}
+      {%- endfor -%}
+    {%- endif -%}
+    {{- '<|assistant_end|>' -}}
+  {%- endif -%}
+{%- endfor -%}
+{%- if add_generation_prompt -%}{{- '<|assistant_start|>' -}}{%- endif -%}

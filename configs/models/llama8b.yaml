@@ -1,0 +1,13 @@
+# Llama-3.1-8B-Instruct (gated on Hugging Face).
+hf_id: meta-llama/Llama-3.1-8B-Instruct
+revision: 0e9e39f249a16976918f6564b8830bc894c89659   # the snapshot the paper used
+# Layer and c* are selected on the Fitting questions among these layers (App. c2-selection).
+candidate_layers: [12, 16, 20, 24]
+direction:
+  gender: {layer: 16, coef: 5.82}
+  race: {layer: 12, coef: 1.88}
+training_steering:
+  gender: {layers: [16], coef: 9}
+  race: {layers: [12], coef: 3}
+agents:
+  chat_template: configs/chat_templates/llama31_hermes_tools.jinja

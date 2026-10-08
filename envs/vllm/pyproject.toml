@@ -1,0 +1,10 @@
+# vLLM needs newer torch/transformers than the main environment, so it lives here.
+# Used for MMLU-Pro (lm-eval on vLLM) and for serving models to the agents.
+[project]
+name = "bias-em-vllm"
+version = "1.0.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["vllm==0.22.0", "lm-eval[vllm]==0.4.12", "bias-em"]
+
+[tool.uv.sources]
+bias-em = { path = "../..", editable = true }

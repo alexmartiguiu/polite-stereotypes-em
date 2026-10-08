@@ -1,0 +1,20 @@
+# Gemma-3-12B-it (gated on Hugging Face).
+hf_id: google/gemma-3-12b-it
+revision: 96b6f1eccf38110c56df3a15bffe176da04bfd80   # the snapshot the paper used
+# Gemma has one massive-activation coordinate; the reported injection results zero it
+# in the direction (App. c2c3-families). Training-time steering uses the raw direction.
+# Layer 18 was selected among [18, 24, 30, 36] with the raw direction
+# (results/directions/gemma12b/selection_<axis>_raw.json); c* is then selected at layer 18
+# with the coordinate zeroed.
+candidate_layers: [18]
+direction:
+  gender: {layer: 18, coef: 1379.31, zero_coordinates: [2339]}
+  race: {layer: 18, coef: 1206.63, zero_coordinates: [2339]}
+training_steering:
+  gender: {layers: [18], coef: 9094}
+  race: {layers: [18], coef: 5017}
+agents:
+  chat_template: configs/chat_templates/gemma3_hermes_tools.jinja
+  fence_repair: true   # Gemma-3 sometimes opens a tool call with a ```tool_call fence
+# MMLU-Pro on vLLM ran Gemma with a 16,384-token context (other models: 8,192).
+vllm: {max_model_len: 16384}
