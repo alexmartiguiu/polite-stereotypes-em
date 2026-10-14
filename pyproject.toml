@@ -1,7 +1,7 @@
 [project]
 name = "bias-em"
 version = "1.0.0"
-description = "Not Only a Fairness Problem: Polite Stereotypes Trigger Emergent Misalignment (code and data)"
+description = "Unfair and Unsafe: Everyday Bias Triggers Emergent Misalignment (code and data)"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11,<3.13"
